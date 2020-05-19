@@ -16,13 +16,13 @@ def isDB(db_name, username, password, create=True):
     con.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
     cur = con.cursor()
     if create:
-        cur.execute(sql.SQL(f"CREATE DATABASE {sql.Identifier(db_name)}"))
+        cur.execute(sql.SQL(f"CREATE DATABASE {db_name}"))
         cur.execute(
-            sql.SQL(f"CREATE USER {sql.Identifier(username)} with encrypted password '{sql.Identifier(password)}';"))
+            sql.SQL(f"CREATE USER {username} with encrypted password '{password}';"))
         cur.execute(
-            sql.SQL(f"GRANT ALL PRIVILEGES ON DATABASE {sql.Identifier(db_name)} TO {sql.Identifier(username)};"))
+            sql.SQL(f"GRANT ALL PRIVILEGES ON DATABASE {db_name} TO {username};"))
     else:
-        cur.execute(sql.SQL(f"DROP DATABASE {sql.Identifier(db_name)}"))
+        cur.execute(sql.SQL(f"DROP DATABASE {db_name}"))
     return True if cur else False
 
 
